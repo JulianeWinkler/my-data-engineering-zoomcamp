@@ -67,6 +67,7 @@ if __name__ == '__main__':
    parser.add_argument('--table_name', required=True, help='name of the table where we will write the results to')
    parser.add_argument('--url', required=True, help='url of the csv file')
 
+
    args = parser.parse_args()
 
    main(args)
