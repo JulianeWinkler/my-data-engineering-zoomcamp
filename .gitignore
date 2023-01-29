@@ -131,5 +131,6 @@ dmypy.json
 # Bynary files
 *.csv
 *.csv.gz
-*.txt
 /week_1/2_docker_sql/ny_taxi_postgres_data/*
+/week_2/ny_taxi_postgres_data/*
+
