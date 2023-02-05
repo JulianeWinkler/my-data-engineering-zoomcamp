@@ -18,12 +18,18 @@ def extract_from_gcs(color : str, year : int, month : int) -> Path:
 
 
 @task()
-def read_local_write_bq(path : Path) -> None:
+def read_file(path : Path) -> pd.DataFrame:
+    """Reading data to df"""
+    df = pd.read_parquet(path)
+    return df
+
+
+@task()
+def write_bq(df : pd.DataFrame) -> None:
     """Write dataframe to BigQuery"""
 
     gcp_credentials_block = GcpCredentials.load("zoomcamp-gcp-creds")
     
-    df = pd.read_parquet(path)
     df.to_gbq(
         destination_table="dezoomcamp.rides",
         project_id="sublime-forest-375816",
@@ -35,15 +41,23 @@ def read_local_write_bq(path : Path) -> None:
 
 
 @flow(log_prints=True)
-def etl_gcs_to_bq() -> None:
+def etl_gcs_to_bq(color, year, month) -> None:
     """the main etl flow to load data to big query"""
-    color="yellow"
-    year=2021
-    month=1
-
     path = extract_from_gcs(color, year, month)
-    read_local_write_bq(path)
+    df = read_file(path)
+    print(f"this flow processed {len(df)} rows")
+    write_bq(df)
+
+
+
+@flow()
+def etl_parent_flow_bq(color : str = "yellow", year : int = 2019, months: list[int] = [2, 3]) -> None:
+    for month in months:
+        etl_gcs_to_bq(color, year, month)
 
 
 if __name__ == '__main__':
-    etl_gcs_to_bq()
+    color = "yellow"
+    months = [2, 3]
+    year = 2019
+    etl_parent_flow_bq(color, year, months)
