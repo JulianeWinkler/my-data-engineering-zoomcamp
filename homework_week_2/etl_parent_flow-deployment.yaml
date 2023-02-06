@@ -2,14 +2,20 @@
 ### A complete description of a Prefect Deployment for flow 'etl-parent-flow'
 ###
 name: Parameterized ETL Web to GCS
-description: null
-version: 7c5fc226aab2bc730206091763ebab75
+description: Zoomcamp Deployment Web to GCS
+version: 18b73725d172a62ec3b574b9fe88acb1
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
-parameters: {"color" : "yellow", "months" : [2,3], "year" : 2019}
+parameters: {"color" : "green", "months" : [11], "year" : 2020}
 schedule: null
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-parent-flow
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -18,14 +24,11 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
+  _block_document_id: ba5e7eb8-8ef2-40dc-8a74-74d3aa3a083c
+  _block_document_name: anonymous-e75f671c-d8b4-487f-932a-2c160fe3267e
+  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: etl-parent-flow
-manifest_path: null
 storage: null
 path: /home/juliane/Python/my-data-engineering-zoomcamp/homework_week_2
 entrypoint: etl_web_to_gcs_parameterized.py:etl_parent_flow
