@@ -3,13 +3,19 @@
 ###
 name: etl_github
 description: null
-version: 18b73725d172a62ec3b574b9fe88acb1
+version: 0db9fd695dfd0541ba36388697381e2c
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
 parameters: {}
 schedule: null
 infra_overrides: {}
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-parent-flow
+manifest_path: null
 infrastructure:
   type: process
   env: {}
@@ -18,14 +24,11 @@ infrastructure:
   command: null
   stream_output: true
   working_dir: null
+  _block_document_id: 1a65653d-b573-4d63-a925-06e35aac22a6
+  _block_document_name: anonymous-8fab4060-84bf-483b-976e-b70120f97339
+  _is_anonymous: true
   block_type_slug: process
   _block_type_slug: process
-
-###
-### DO NOT EDIT BELOW THIS LINE
-###
-flow_name: etl-parent-flow
-manifest_path: null
 storage:
   repository: https://github.com/JulianeWinkler/my-data-engineering-zoomcamp
   reference: null
@@ -43,19 +46,18 @@ parameter_openapi_schema:
   properties:
     color:
       title: color
-      default: yellow
+      default: green
       position: 0
       type: string
     year:
       title: year
-      default: 2021
+      default: 2020
       position: 1
       type: integer
     months:
       title: months
       default:
-      - 1
-      - 2
+      - 11
       position: 2
       type: array
       items:
