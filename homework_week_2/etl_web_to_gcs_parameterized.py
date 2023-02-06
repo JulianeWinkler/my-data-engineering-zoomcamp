@@ -32,7 +32,7 @@ def clean(df : pd.DataFrame, color : str) -> pd.DataFrame:
 @task()
 def write_local(df : pd.DataFrame, color : str, dataset_file : str) -> Path:
     """write dataframe out locally as a parquet file"""
-    path = Path(f"data/{color}/{dataset_file}.parquet")
+    path = Path(f"../data/{color}/{dataset_file}.parquet")
     df.to_parquet(path, compression="gzip")
     return path
 
@@ -64,7 +64,7 @@ def etl_web_to_gcs(color : str, year : int, month : int) -> None:
 
 
 @flow()
-def etl_parent_flow(color: str = "yellow", year: int = 2021, months: list[int] = [1, 2]):
+def etl_parent_flow(color: str = "green", year: int = 2020, months: list[int] = [11]):
     for month in months:
         etl_web_to_gcs(color, year, month)
 
