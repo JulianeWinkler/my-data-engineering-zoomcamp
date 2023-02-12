@@ -3,7 +3,7 @@
 ###
 name: etl_github
 description: null
-version: 0db9fd695dfd0541ba36388697381e2c
+version: 98494aa1b8cb402824d6312a2c0910d0
 # The work queue that will handle this deployment's runs
 work_queue_name: default
 tags: []
