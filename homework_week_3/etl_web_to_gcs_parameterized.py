@@ -4,6 +4,7 @@ from prefect import flow, task
 from prefect_gcp.cloud_storage import GcsBucket
 from datetime import timedelta
 from prefect.tasks import task_input_hash
+import os
 
 
 @task(log_prints=True, retries=3, cache_key_fn=task_input_hash, cache_expiration=timedelta(days=1))
@@ -23,6 +24,9 @@ def clean(df : pd.DataFrame, color : str) -> pd.DataFrame:
     if color == "green":
         df['lpep_pickup_datetime'] = pd.to_datetime(df['lpep_pickup_datetime'])
         df['lpep_dropoff_datetime'] = pd.to_datetime(df['lpep_pickup_datetime'])
+    if color == "fhv":
+        df['pickup_datetime'] = pd.to_datetime(df['pickup_datetime'])
+        df['dropOff_datetime'] = pd.to_datetime(df['dropOff_datetime'])
     print(df.head(2))
     print(f"columns: {df.dtypes}")
     print(f"rows: {len(df)}")
@@ -32,7 +36,8 @@ def clean(df : pd.DataFrame, color : str) -> pd.DataFrame:
 @task()
 def write_local(df : pd.DataFrame, color : str, dataset_file : str) -> Path:
     """write dataframe out locally as a parquet file"""
-    path = Path(f"homework_week_3/data/{color}/{dataset_file}.csv.gz")
+    wd = os.getcwd()
+    path = Path(f"{wd}/data/{color}/{dataset_file}.csv.gz")
     to_path = Path(f"data/{color}/{dataset_file}.csv.gz")
     df.to_csv(path, compression="gzip")
     return path, to_path
