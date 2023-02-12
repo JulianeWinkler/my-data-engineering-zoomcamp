@@ -1,0 +1,55 @@
+###
+### A complete description of a Prefect Deployment for flow 'etl-parent-flow'
+###
+name: deployment_for_week3_gcs
+description: null
+version: 27414c36ce015597c714914c1b549b6a
+# The work queue that will handle this deployment's runs
+work_queue_name: default
+tags: []
+parameters: {"color" : "fhv", "months" : [1,2,3,4,5,6,7,8,9,10,11,12], "year" : 2019}
+schedule: null
+infra_overrides: {}
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command: null
+  stream_output: true
+  working_dir: null
+  block_type_slug: process
+  _block_type_slug: process
+
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: etl-parent-flow
+manifest_path: null
+storage: null
+path: /home/juliane/Python/my-data-engineering-zoomcamp/homework_week_3
+entrypoint: etl_web_to_gcs_parameterized.py:etl_parent_flow
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties:
+    color:
+      title: color
+      default: green
+      position: 0
+      type: string
+    year:
+      title: year
+      default: 2020
+      position: 1
+      type: integer
+    months:
+      title: months
+      default:
+      - 11
+      position: 2
+      type: array
+      items:
+        type: integer
+  required: null
+  definitions: null
