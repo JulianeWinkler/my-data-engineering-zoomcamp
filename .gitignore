@@ -135,3 +135,9 @@ dmypy.json
 /week_2/ny_taxi_postgres_data/*
 /week_2/ny_taxi_postgres_data
 *.parquet
+
+# Default .gitignore content added by dbt Cloud
+target/
+dbt_packages/
+logs/
+# end dbt Cloud content
