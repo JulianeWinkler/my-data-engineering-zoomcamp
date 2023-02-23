@@ -10,6 +10,7 @@ sources:
       tables:
         - name: green_partitioned_tripdata
         - name: yellow_partitioned_tripdata
+        - name: fhv_nonpartitioned_tripdata
 
 
 
@@ -196,4 +197,34 @@ models:
             description: Total amount of all tolls paid in trip.
           - name: Total_amount 
             description: The total amount charged to passengers. Does not include cash tips.
+
+
+    - name: stg_fhv_tripdata
+      description: > 
+        For-Hire Vehicle (“FHV”) trip records include fields capturing the dispatching base license number and the pick-up date, time, and taxi zone location
+        ID (shape file below). These records are generated from the FHV Trip Record submissions made by bases. The TLC publishes base trip record data
+        as submitted by the bases, and we cannot guarantee or confirm their accuracy or completeness. Therefore, this may not represent the total amount
+        of trips dispatched by all TLC-licensed bases. The TLC performs routine reviews of the records and takes enforcement actions when necessary to 
+        ensure, to the extent possible, complete and accurate information.
+      columns:
+          - name: tripid
+            description: Primary key for this table, generated with a concatenation of dispatching_base_num+pickup_datetime
+          - name: dispatching_base_num 
+            description: The TLC Base License Number of the base that dispatched the trip
+          - name: pickup_datetime 
+            description: The date and time of the trip pick-up
+          - name: dropoff_datetime 
+            description: The date and time of the trip dropoff
+          - name: Pickup_locationid
+            description: TLC Taxi Zone in which the trip began
+          - name: dropoff_locationid 
+            description: TLC Taxi Zone in which the trip ended
+          - name: SR_Flag
+            description: >
+              Indicates if the trip was a part of a shared ride chain offered by a High Volume FHV company (e.g. Uber Pool, Lyft Line). For shared
+              trips, the value is 1. For non-shared rides, this field is null. For most High Volume FHV companies, only shared rides that
+              were requested AND matched to another shared-ride request over the course of the journey are flagged. However, Lyft (base license
+              numbers B02510 + B02844) also flags rides for which a shared ride was requested but another passenger was not successfully matched
+              to share the trip—therefore, trips records with SR_Flag=1 from those two bases could indicate EITHER a first trip in a shared trip chain OR
+              a trip for which a shared ride was requested but never matched. Users should anticip
 
