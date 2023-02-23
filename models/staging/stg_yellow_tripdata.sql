@@ -6,7 +6,14 @@ WITH tripdata AS
   *
   ,ROW_NUMBER() OVER(PARTITION BY (cast(vendorid as integer)), tpep_pickup_datetime) AS rn
   FROM{{ source('staging','yellow_partitioned_tripdata') }}
-  WHERE vendorid IS NOT NULL 
+  WHERE vendorid IS NOT NULL
+  ORDER BY
+   tpep_dropoff_datetime
+  ,pulocationid
+  ,dolocationid
+  ,ratecodeid
+  ,trip_distance
+  ,passenger_count
 )
 
 SELECT
