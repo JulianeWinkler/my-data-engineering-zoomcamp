@@ -27,3 +27,17 @@ df_fhv = spark.read.parquet('data/pq/fhvhv/2021/06/')
 
 df_fhv.show()
 df_fhv.printSchema()
+
+df_fhv.createOrReplaceTempView('fhv_trips_data')
+df_zones.createOrReplaceTempView('zones_data')
+
+spark.sql("""
+SELECT
+    COUNT(1) AS number_trips
+    ,pz.Zone
+    FROM fhv_trips_data fh
+    INNER JOIN zones_data pz ON pz.LocationID = fh.PULocationID
+    INNER JOIN zones_data dz ON dz.LocationID = fh.DOLocationID
+    GROUP BY pz.Zone
+    ORDER BY number_trips DESC
+""").show()

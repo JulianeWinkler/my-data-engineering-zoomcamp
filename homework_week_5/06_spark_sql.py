@@ -26,7 +26,7 @@ df_fhv \
     .orderBy("pickup_date") \
     .show()
 
-df_fhv.registerTempTable('fhv_trips_data')
+df_fhv.createOrReplaceTempView('fhv_trips_data')
 
 spark.sql("""
 SELECT
