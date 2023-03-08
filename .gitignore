@@ -138,6 +138,7 @@ dmypy.json
 *.parquet.*
 /week_5/fhvhv/*
 /week_5/fhvhv
+/week_5/data/pq
 /homework_week_5/data/*
 /homework_week_5/data/
 
