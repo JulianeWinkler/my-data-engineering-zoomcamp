@@ -141,7 +141,7 @@ dmypy.json
 /week_5/data/pq
 /homework_week_5/data/*
 /homework_week_5/data/
-
+/homework_week_6/json/kafka_week6/*
 # Default .gitignore content added by dbt Cloud
 target/
 dbt_packages/
@@ -153,3 +153,4 @@ target/
 dbt_packages/
 logs/
 # end dbt Cloud content
+
