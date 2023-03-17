@@ -1,4 +1,6 @@
-INPUT_DATA_PATH = '../data/green_tripdata_2019-01.csv'
+#INPUT_DATA_PATH = 'homework_week_6/data/fhv_tripdata_2019-01.csv'
+INPUT_DATA_PATH = '../data/fhv_tripdata_2019-01.csv'
+
 
 BOOTSTRAP_SERVERS = ['localhost:9092']
-KAFKA_TOPIC = 'rides_green_json'
+KAFKA_TOPIC = 'rides_fhv_json'

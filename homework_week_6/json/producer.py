@@ -4,7 +4,7 @@ from typing import List, Dict
 from kafka import KafkaProducer
 from kafka.errors import KafkaTimeoutError
 
-from ride import Ride
+from ride_fhv import Ride
 from settings import BOOTSTRAP_SERVERS, INPUT_DATA_PATH, KAFKA_TOPIC
 
 
@@ -26,8 +26,8 @@ class JsonProducer(KafkaProducer):
     def publish_rides(self, topic: str, messages: List[Ride]):
         for ride in messages:
             try:
-                record = self.producer.send(topic=topic, key=ride.PULocationID, value=ride)
-                print('Record {} successfully produced at offset {}'.format(ride.PULocationID, record.get().offset))
+                record = self.producer.send(topic=topic, key=ride.PUlocationID, value=ride)
+                print('Record {} successfully produced at offset {}'.format(ride.PUlocationID, record.get().offset))
             except KafkaTimeoutError as e:
                 print(e.__str__())
 
