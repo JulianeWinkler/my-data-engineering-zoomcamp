@@ -45,6 +45,16 @@ print(f"post: na in rows: {df['DOLocationID'].isna().sum()}")
 df['PULocationID'] = df['PULocationID'].astype(int)
 df['DOLocationID'] = df['DOLocationID'].astype(int)
 
+
+print(f"pre: na in rows: {df['ehail_fee'].isna().sum()}")
+print(f"pre: na in rows: {df['congestion_surcharge'].isna().sum()}")
+
+df['ehail_fee'] = df['ehail_fee'].fillna(0)
+df['congestion_surcharge'] = df['congestion_surcharge'].fillna(0)
+
+print(f"post: na in rows: {df['ehail_fee'].isna().sum()}")
+print(f"post: na in rows: {df['congestion_surcharge'].isna().sum()}")
+
 print(df.dtypes)
 print(df.head(5))
 

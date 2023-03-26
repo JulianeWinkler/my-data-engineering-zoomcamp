@@ -30,12 +30,25 @@ class JsonProducer(KafkaProducer):
 
 
     def publish_rides(self, topic: str, messages: List):
-        for ride in messages:
-            try:
-                record = self.producer.send(topic=topic, key=ride.PUlocationID, value=ride)
-                print('Record {} successfully produced at offset {}'.format(ride.PUlocationID, record.get().offset))
-            except KafkaTimeoutError as e:
-                print(e.__str__())
+        if topic == st.KAFKA_TOPIC_FHV:
+            for ride in messages:
+                try:
+                    record = self.producer.send(topic=topic, key=ride.PUlocationID, value=ride)
+                    print('For Record {} successfully produced at offset {}'.format(ride.PUlocationID, record.get().offset))
+                except KafkaTimeoutError as e:
+                    print(e.__str__())
+            print(f'kafa topic is: {topic}')
+        if topic == st.KAFKA_TOPIC_GREEN:
+            for ride in messages:
+                try:
+                    record = self.producer.send(topic=topic, key=ride.PULocationID, value=ride)
+                    print('For Record {} successfully produced at offset {}'.format(ride.PULocationID, record.get().offset))
+                except KafkaTimeoutError as e:
+                    print(e.__str__())
+            print(f'kafa topic is: {topic}')
+        else:
+            print('no kafka topic defined in settings file')
+
 
 
 if __name__ == '__main__':
