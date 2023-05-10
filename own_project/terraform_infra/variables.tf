@@ -1,5 +1,6 @@
-locals {
-  data_lake_bucket = "dtc_taxi_data"
+variable "bucket_name_set" {
+  description = "Your bucket name"
+  type = list(string)
 }
 
 variable "project" {
