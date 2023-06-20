@@ -4,7 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def ingest_callable(user, password, host, port, db, table_name, csv_file, execution_date):
-   print(table_name, csv_file, execution_date)
+   print(table_name, csv_file, execution_date, user, password)
    
 
    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')

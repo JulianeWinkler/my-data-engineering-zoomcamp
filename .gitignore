@@ -136,6 +136,7 @@ dmypy.json
 /week_1/2_docker_sql/ny_taxi_postgres_data/*
 /week_2/ny_taxi_postgres_data/*
 /week_2/ny_taxi_postgres_data
+/own_project/workflow_orch/airflow/ny_taxi_postgres_data
 *.parquet
 *.parquet.*
 /week_5/fhvhv/*

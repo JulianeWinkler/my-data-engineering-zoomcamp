@@ -11,7 +11,9 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - internal
+        - airflow
+    ##  - internal
+
   
   pgadmin:
     image: dpage/pgadmin4
