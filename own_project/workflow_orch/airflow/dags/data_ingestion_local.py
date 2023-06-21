@@ -33,7 +33,7 @@ if url.endswith('.csv.gz'):
 """
 
 OUTPUT_FILE_TEMPLATE = AIRFLOW_HOME + '/output_yellow_2021_01.csv.gz'
-TABLE_NAME_TEMPLATE = 'yellow_taxi_2021-01'
+TABLE_NAME_TEMPLATE = 'yellow_taxi_2021-01_{{execution_date.strftime(\'%Y_%m_%d\')}}'
 
 with local_workflow:
     wget_task = BashOperator(

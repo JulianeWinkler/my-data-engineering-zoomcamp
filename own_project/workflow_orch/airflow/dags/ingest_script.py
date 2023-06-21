@@ -4,7 +4,7 @@ import pandas as pd
 from sqlalchemy import create_engine
 
 def ingest_callable(user, password, host, port, db, table_name, csv_file, execution_date):
-   print(table_name, csv_file, execution_date, user, password)
+   print(table_name, csv_file, execution_date, db)
    
 
    engine = create_engine(f'postgresql://{user}:{password}@{host}:{port}/{db}')
@@ -16,6 +16,9 @@ def ingest_callable(user, password, host, port, db, table_name, csv_file, execut
    df_iter = pd.read_csv(csv_file, iterator=True, chunksize=100000)
    df = next(df_iter)
    if 'yellow' in csv_file:
+      df['tpep_pickup_datetime'] = pd.to_datetime(df.tpep_pickup_datetime)
+      df['tpep_dropoff_datetime'] = pd.to_datetime(df.tpep_dropoff_datetime)
+   elif 'green' in csv_file:
       df['lpep_pickup_datetime'] = pd.to_datetime(df.lpep_pickup_datetime)
       df['lpep_dropoff_datetime'] = pd.to_datetime(df.lpep_dropoff_datetime)
    else:
@@ -32,7 +35,10 @@ def ingest_callable(user, password, host, port, db, table_name, csv_file, execut
          t_start = time()
 
          df = next(df_iter)
-         if 'tripdata' in url:
+         if 'yellow' in csv_file:
+            df['tpep_pickup_datetime'] = pd.to_datetime(df.tpep_pickup_datetime)
+            df['tpep_dropoff_datetime'] = pd.to_datetime(df.tpep_dropoff_datetime)
+         elif 'green' in csv_file:
             df['lpep_pickup_datetime'] = pd.to_datetime(df.lpep_pickup_datetime)
             df['lpep_dropoff_datetime'] = pd.to_datetime(df.lpep_dropoff_datetime)
          else:
