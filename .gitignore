@@ -157,3 +157,8 @@ dbt_packages/
 logs/
 # end dbt Cloud content
 
+#terraform init files
+.terraform
+terraform.tf*
+.terraform.lock*
+

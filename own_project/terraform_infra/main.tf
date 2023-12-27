@@ -33,7 +33,7 @@ resource "google_storage_bucket" "data-lake-bucket-set" {
       type = "Delete"
     }
     condition {
-      age = 60  // days
+      age = 90  // days
     }
   }
 
